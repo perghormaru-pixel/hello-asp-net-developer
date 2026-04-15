@@ -1,25 +1,23 @@
 using Acme.Hello.Platform.Generic.Domain.Model.Entities;
 using Acme.Hello.Platform.Generic.Interfaces.REST.Resources;
 
-
 namespace Acme.Hello.Platform.Generic.Interfaces.REST.Assemblers;
-
 /// <summary>
-/// The Developer Assembler verify request
+/// Assembler class to convert a GreetDeveloperRequest into a Developer entity.
 /// </summary>
-
 public static class DeveloperAssembler
 {
-    public static Developer? ToEntityFromRequest(GreetDeveloperResponse? request)
+    /// <summary>
+    /// Converts a GreetDeveloperRequest into a Developer entity.
+    /// </summary>
+    /// <param name="request">The GreetDeveloperRequest to convert.</param>
+    /// <returns>A Developer entity if the request is valid; otherwise, null.</returns>
+    public static Developer? ToEntityFromRequest(GreetDeveloperRequest? request)
     {
         if (request is null 
-            || string.IsNullOrWhiteSpace(request.FirstName)
+            || string.IsNullOrWhiteSpace(request.FirstName)  
             || string.IsNullOrWhiteSpace(request.LastName))
             return null;
-
-        var firstName = request.FirstName;
-        var lastName = request.LastName;
-        return new Developer(firstName, lastName);
-
+        return new Developer(request.FirstName, request.LastName);
     }
 }
